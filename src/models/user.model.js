@@ -19,7 +19,7 @@ const userSchema = new Schema({
         trim: true,
         
     },
-    fullname: {
+    fullName: {
         type: String,
         required: true,
         trim: true,
@@ -55,7 +55,7 @@ const userSchema = new Schema({
 })
 userSchema.pre("save", async function(next) {  // pre middleware use to run the function before saving the particular data
     if (!this.isModified("password")) return next();
-    this.password = bcrypt.hash(this.password, 10)
+    this.password = await bcrypt.hash(this.password, 10)
     next()
 
 } )
